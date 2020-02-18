@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback ejemplos</title>
+</head>
+<body>
+    
+<script>
+/*
+    Sumar 2 numeros,
+    el resultado elevarlo al cuadrado,
+    el resultado dividirlo entre 2,
+    el resultado sustraerle 100 y
+    el resutado validar si es mayor a 0
+
+*/
+function sumar(n1,n2, callback){
+    callback(n1+n2);
+}
+function cuadrado(n, callback){
+    callback(n*n);
+}
+function dividir(n, callback){
+    callback(n/2);
+}
+function restar(n, callback){
+    callback(n-100);
+}
+function mayorCero(n, callback){
+    if(n>0){
+        callback('Mayor a 0');
+    }else{
+        callback('Menor o igual que 0');
+    }
+}
+
+function cbSumar(resSumar){
+    console.log('Suma de 2 numeros: ', resSumar)
+    cuadrado(resSumar, cbCuadrado);
+}
+function cbCuadrado(resCuadrado){
+    console.log('El cuadrado de la suma: ', resCuadrado);
+    dividir(resCuadrado, cbDividir);
+}
+function cbDividir(resDividir){
+    console.log('Division entre 2: ', resDividir);
+    restar(resDividir, cbRestar);
+}
+function cbRestar(resRestar){
+    console.log('Restar 100: ', resRestar);
+    mayorCero(resRestar, cbMayorCero);
+}
+function cbMayorCero(resMayorCero){
+    console.log(resMayorCero);
+}
+
+sumar(8,2, cbSumar);
+
+
+</script>
+    
+</body>
+</html>
